@@ -1,0 +1,6 @@
+FROM registry.cap1.paas.gsnetcloud.corp/produban/javase:1.4.9.RELEASE
+COPY target/*.jar $APP_HOME/application.jar
+EXPOSE 10080
+EXPOSE 10081
+ENV TZ="Europe/London"
+ENV JAVA_OPTS_EXT="-Djava.security.egd=file:/dev/./urandom"

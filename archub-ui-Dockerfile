@@ -1,0 +1,11 @@
+FROM registry.cap1.paas.gsnetcloud.corp/produban/nginx:2.0.1.RELEASE
+RUN rm -rf /usr/share/nginx/html/*
+COPY dist/archub-ui/ /usr/share/nginx/html/
+
+# copy new nginx configuration
+RUN rm /etc/nginx/conf.d/status.conf
+COPY nginx_config/default.conf /etc/nginx/conf.d/
+COPY nginx_config/2.config_nginx.sh /opt/produban/start.d/
+
+ENV TZ="Europe/London"
+#CMD ["nginx", "-g", "daemon off;"]

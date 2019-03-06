@@ -1,0 +1,15 @@
+FROM registry.cap1.paas.gsnetcloud.corp/produban/nodejs:5.0.8.RELEASE
+
+ENV GIT_SSL_NO_VERIFY=true
+ENV TZ="Europe/London"
+RUN /bin/bash -c 'echo $APP_HOME; pwd; ls -l;'
+RUN rm -rf $APP_HOME/*
+
+COPY . $APP_HOME
+RUN /bin/bash -c 'echo $APP_HOME; pwd; ls -l;'
+EXPOSE 8080
+RUN npm config set registry https://nexus.almuk.santanderuk.corp/repository/npm-group/ \
+    && npm config set strict-ssl false \
+    && npm install --prefix $APP_HOME
+
+RUN /bin/bash -c 'echo $APP_HOME; pwd; ls -l;'
